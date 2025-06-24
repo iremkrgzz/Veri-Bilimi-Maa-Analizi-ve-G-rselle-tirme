@@ -1,0 +1,512 @@
+geom_bar(stat = "identity", position = "stack") +
+geom_text(aes(label = count),
+position = position_stack(vjust = 0.5), size = 3, color = "white") +
+labs(title = "Experience Level KD1rD1lD1mD1nda Remote Ratio DaDD1lD1mD1",
+x = "Experience Level",
+y = "Count",
+fill = "Remote Ratio") +
+theme_minimal() +
+theme(axis.text.x = element_text(angle = 45, hjust = 1))
+sapply(df, class)
+##############################################################
+# work_year bazD1nda ortalama salary hesaplama
+salary_by_year <- df %>%
+group_by(work_year) %>%
+summarise(avg_salary = mean(salary, na.rm = TRUE), .groups = "drop")
+# Lineplot oluEturma
+ggplot(salary_by_year, aes(x = work_year, y = avg_salary)) +
+geom_line(color = "blue", size = 1) +
+geom_point(color = "red", size = 2) + # Veri noktalarD1nD1 vurgulama
+geom_text(aes(label = round(avg_salary, 2)), vjust = -0.5, size = 3) + # DeDerleri ekleme
+labs(title = "Work Year'a GC6re Ortalama Salary DeDerleri",
+x = "Work Year",
+y = "Ortalama Salary") +
+theme_minimal() +
+theme(axis.text.x = element_text(angle = 45, hjust = 1))
+##############################################################
+# work_year bazD1nda ortalama salary hesaplama
+salary_by_year <- df %>%
+group_by(work_year) %>%
+summarise(avg_salary = mean(salary, na.rm = TRUE), .groups = "drop")
+# Lineplot oluEturma
+ggplot(salary_by_year, aes(x = work_year, y = avg_salary)) +
+geom_line(color = "yellow", size = 1) +
+geom_point(color = "red", size = 2) + # Veri noktalarD1nD1 vurgulama
+geom_text(aes(label = round(avg_salary, 2)), vjust = -0.5, size = 3) + # DeDerleri ekleme
+labs(title = "Work Year'a GC6re Ortalama Salary DeDerleri",
+x = "Work Year",
+y = "Ortalama Salary") +
+theme_minimal() +
+theme(axis.text.x = element_text(angle = 45, hjust = 1))
+##############################################################
+# work_year bazD1nda ortalama salary hesaplama
+salary_by_year <- df %>%
+group_by(work_year) %>%
+summarise(avg_salary = mean(salary, na.rm = TRUE), .groups = "drop")
+# Lineplot oluEturma
+ggplot(salary_by_year, aes(x = work_year, y = avg_salary)) +
+geom_line(color = "yellow", size = 1) +
+geom_point(color = "red", size = 2) + # Veri noktalarD1nD1 vurgulama
+geom_text(aes(label = round(avg_salary, 2)), vjust = -0.5, size = 3) + # DeDerleri ekleme
+labs(title = "Work Year'a GC6re Ortalama Salary DeDerleri",
+x = "Work Year",
+y = "Ortalama Salary") +
+theme_minimal() +
+scale_y_continuous(labels = label_comma()) +
+theme(axis.text.x = element_text(angle = 45, hjust = 1))
+##############################################################
+# work_year bazD1nda ortalama salary hesaplama
+salary_by_year <- df %>%
+group_by(work_year) %>%
+summarise(avg_salary = mean(salary, na.rm = TRUE), .groups = "drop")
+# Lineplot oluEturma
+ggplot(salary_by_year, aes(x = work_year, y = avg_salary)) +
+geom_line(color = "gray", size = 1) +
+geom_point(color = "red", size = 2) + # Veri noktalarD1nD1 vurgulama
+geom_text(aes(label = round(avg_salary, 2)), vjust = -0.5, size = 3) + # DeDerleri ekleme
+labs(title = "Work Year'a GC6re Ortalama Salary DeDerleri",
+x = "Work Year",
+y = "Ortalama Salary") +
+theme_minimal() +
+scale_y_continuous(labels = label_comma()) +
+theme(axis.text.x = element_text(angle = 45, hjust = 1))
+library(reshape2)
+#################################################################################
+# Sadece sayD1sal deDiEkenleri seC'
+numeric_data <- df %>%
+select_if(is.numeric)
+# Korelasyon matrisini hesapla
+cor_matrix <- cor(numeric_data, use = "complete.obs")
+# Korelasyon matrisini uzun forma dC6nC<EtC<r
+melted_cor_matrix <- melt(cor_matrix)
+# Korelasyon heatmap oluEturma
+ggplot(melted_cor_matrix, aes(x = Var1, y = Var2, fill = value)) +
+geom_tile() +
+geom_text(aes(label = round(value, 2)), color = "black", size = 3) + # Korelasyon deDerlerini yazdD1r
+scale_fill_gradient2(low = "blue", mid = "white", high = "red", midpoint = 0,
+limits = c(-1, 1), name = "Korelasyon") +
+labs(title = "Korelasyon Heatmap",
+x = "DeDiEkenler",
+y = "DeDiEkenler") +
+theme_minimal() +
+theme(axis.text.x = element_text(angle = 45, hjust = 1))
+################################################################
+# 3D scatter plot oluEturma
+plot_ly(df, x = ~x, y = ~y, z = ~z, type = "scatter3d", mode = "markers",
+marker = list(size = 5, color = ~z, colorscale = "Viridis")) %>%
+layout(
+title = "Basic 3D Scatter Plot",
+scene = list(
+xaxis = list(title = "X Axis"),
+yaxis = list(title = "Y Axis"),
+zaxis = list(title = "Z Axis")
+)
+)
+colnames(df),
+colnames(df)
+################################################################
+# 3D scatter plot oluEturma
+plot_ly(df,
+x = ~work_year,
+y = ~remote_ratio,
+z = ~salary_in_usd,
+type = "scatter3d",
+mode = "markers",
+color = ~salary_in_usd,
+marker = list(size = 5, colorscale = "Viridis")) %>%
+layout(
+title = "Work Year vs Remote Ratio vs Salary (3D Scatter Plot)",
+scene = list(
+xaxis = list(title = "Work Year"),
+yaxis = list(title = "Remote Ratio"),
+zaxis = list(title = "Salary (USD)")
+)
+)
+################################################################
+# FaktC6r olan deDiEkenleri sayD1sal tC<re dC6nC<EtC<rme
+df$work_year <- as.numeric(as.character(df$work_year))
+df$remote_ratio <- as.numeric(as.character(df$remote_ratio))
+# 3D scatter plot oluEturma
+plot_ly(df,
+x = ~work_year,
+y = ~remote_ratio,
+z = ~salary_in_usd,
+type = "scatter3d",
+mode = "markers",
+color = ~salary_in_usd,
+marker = list(size = 5, colorscale = "Viridis")) %>%
+layout(
+title = "Work Year vs Remote Ratio vs Salary (3D Scatter Plot)",
+scene = list(
+xaxis = list(title = "Work Year"),
+yaxis = list(title = "Remote Ratio"),
+zaxis = list(title = "Salary (USD)")
+)
+)
+library(akima)
+install.packages("akima")
+library(akima)
+###########################################
+# YoDunluk iC'in grid oluEtur
+interpolated <- with(df, akima::interp(
+x = remote_ratio,
+y = work_year,
+z = salary_in_usd,
+duplicate = "mean" # AynD1 noktalarD1n ortalamasD1nD1 al
+))
+# 3D yoDunluk grafiDi oluEturma
+plot_ly(
+x = interpolated$x,
+y = interpolated$y,
+z = interpolated$z,
+type = "surface"
+) %>%
+layout(
+title = "3D Salary Density Plot",
+scene = list(
+xaxis = list(title = "Remote Ratio"),
+yaxis = list(title = "Work Year"),
+zaxis = list(title = "Average Salary in USD")
+)
+)
+########################################################################
+# Crnek veri setini kullanarak 3D scatter plot oluEturma
+plot_ly(
+df,
+x = ~salary_in_usd,
+y = ~remote_ratio,
+z = ~work_year,
+type = "scatter3d",
+mode = "markers",
+marker = list(size = 5, color = ~salary_in_usd, colorscale = "Viridis", showscale = TRUE)
+) %>%
+layout(
+title = "3D Scatter Plot: Salary, Remote Ratio, and Work Year",
+scene = list(
+xaxis = list(title = "Salary (USD)"),
+yaxis = list(title = "Remote Ratio"),
+zaxis = list(title = "Work Year")
+)
+)
+########################################################################
+# Kategorik deDiEkenlerin sayD1mD1nD1 yapalD1m (Funnel aEamalarD1nD1 gC6stereceDiz)
+experience_level_count <- df %>%
+group_by(experience_level) %>%
+summarise(count = n())
+job_title_count <- df %>%
+group_by(job_title) %>%
+summarise(count = n())
+# Funnel plot oluEturma
+plot_ly() %>%
+add_trace(
+type = 'funnel',
+x = experience_level_count$count,
+y = experience_level_count$experience_level,
+text = paste(experience_level_count$count, "kiEi"),
+marker = list(color = c('red', 'green', 'blue', 'orange')),
+name = "Experience Level"
+) %>%
+add_trace(
+type = 'funnel',
+x = job_title_count$count,
+y = job_title_count$job_title,
+text = paste(job_title_count$count, "kisi"),
+marker = list(color = c('purple', 'pink', 'yellow', 'cyan')),
+name = "Job Title"
+) %>%
+layout(
+title = "Funnel Plot: Experience Level ve Job Title",
+xaxis = list(title = "SayD1m"),
+yaxis = list(title = "Kategoriler"),
+showlegend = TRUE
+)
+library(akima)
+colnames(df)
+########################################################################
+# Kategorik deDiEkenlerin sayD1mD1nD1 yapalD1m (Funnel aEamalarD1nD1 gC6stereceDiz)
+experience_level_count <- df %>%
+group_by(experience_level) %>%
+summarise(count = n())
+company_size_count <- df %>%
+group_by(company_size) %>%
+summarise(count = n())
+# Funnel plot oluEturma
+plot_ly() %>%
+add_trace(
+type = 'funnel',
+x = experience_level_count$count,
+y = experience_level_count$experience_level,
+text = paste(experience_level_count$count, "kiEi"),
+marker = list(color = c('red', 'green', 'blue', 'orange')),
+name = "Experience Level"
+) %>%
+add_trace(
+type = 'funnel',
+x = company_size_count$count,
+y = company_size_count$company_size,
+text = paste(company_size_count$count, "kisi"),
+marker = list(color = c('purple', 'pink', 'yellow')),
+name = "Company Size"
+) %>%
+layout(
+title = "Funnel Plot: Experience Level ve Company Size",
+xaxis = list(title = "SayD1m"),
+yaxis = list(title = "Kategoriler"),
+showlegend = TRUE
+)
+##########################################################################
+# Simple Bubble Plot oluEturma
+ggplot(df, aes(x = work_year, y = salary_in_usd, size = salary_in_usd, color = salary_in_usd)) +
+geom_point(alpha = 0.7) +
+scale_size_continuous(name = "Salary in USD", range = c(3, 15)) +
+scale_color_viridis_c(option = "D") +
+labs(title = "Simple Bubble Plot",
+x = "Work Year",
+y = "Salary in USD") +
+theme_minimal() +
+theme(legend.position = "bottom")
+##########################################################################
+# 3D heatmap oluEturma
+plot_ly(df, x = ~work_year, y = ~experience_level, z = ~salary_in_usd,
+type = "heatmap3d", colorscale = "Rainbow",
+colorbar = list(title = "Salary in USD")) %>%
+layout(
+title = "3D Heatmap - Work Year, Experience Level, Salary",
+scene = list(
+xaxis = list(title = "Work Year"),
+yaxis = list(title = "Experience Level"),
+zaxis = list(title = "Salary in USD")
+)
+)
+##########################################################################
+plot_ly(df, x = ~work_year, y = ~experience_level, z = ~salary_in_usd,
+type = "surface", colorscale = "Rainbow") %>%
+layout(
+title = "3D Surface Plot - Work Year, Experience Level, Salary",
+scene = list(
+xaxis = list(title = "Work Year"),
+yaxis = list(title = "Experience Level"),
+zaxis = list(title = "Salary in USD")
+)
+)
+#################################################################
+# SayD1sal veriyi sayD1sal forma dC6nC<EtC<rmek
+df$work_year <- as.numeric(df$work_year)
+# Ternary plot oluEturma
+plot_ly(df,
+a = ~work_year,
+b = ~as.numeric(factor(experience_level)),
+c = ~as.numeric(factor(company_size)),
+type = "scatterternary",
+mode = "markers",
+marker = list(symbol = "circle", size = 10, color = ~salary_in_usd, colorscale = "Rainbow", showscale = TRUE)) %>%
+layout(
+title = "Ternary Contour Plot",
+ternary = list(
+sum = 1,
+aaxis = list(title = "Work Year", min = 2015, linewidth = 2, ticks = "outside"),
+baxis = list(title = "Experience Level", min = 1, linewidth = 2, ticks = "outside"),
+caxis = list(title = "Company Size", min = 1, linewidth = 2, ticks = "outside")
+)
+)
+#################################################################
+# SayD1sal veriyi sayD1sal forma dC6nC<EtC<rmek
+df$work_year <- as.numeric(df$work_year)
+# Ternary plot oluEturma
+plot_ly(df,
+a = ~work_year,
+b = ~as.numeric(factor(experience_level)),
+c = ~as.numeric(factor(company_size)),
+type = "scatterternary",
+mode = "markers",
+marker = list(symbol = "circle", size = 10, color = ~salary_in_usd, colorscale = "Rainbow", showscale = TRUE)) %>%
+layout(
+title = "Ternary Contour Plot",
+ternary = list(
+sum = 1,
+aaxis = list(title = "Work Year", min = 2015, linewidth = 2, ticks = "outside"),
+baxis = list(title = "Experience Level", min = 1, linewidth = 2, ticks = "outside"),
+caxis = list(title = "Company Size", min = 1, linewidth = 2, ticks = "outside")
+)
+)
+#################################################################
+# Crnek olarak salary_in_usd ve remote_ratio deDiEkenlerini kullanarak contour plot oluEturma
+ggplot(df, aes(x = remote_ratio, y = salary_in_usd)) +
+stat_contour(aes(z = salary_in_usd, color = ..level..), bins = 15) +  # Contour plot oluEturma
+scale_color_viridis_c() +  # Rengarenk renkler iC'in Viridis renk paleti
+labs(title = "Contour Plot: Salary in USD vs Remote Ratio",
+x = "Remote Ratio",
+y = "Salary in USD") +
+theme_minimal()
+#################################################################
+# Veri temizliDi: Eksik ve duplikat verileri kontrol et
+df_clean <- df %>%
+filter(!is.na(salary_in_usd) & !is.na(remote_ratio)) %>%
+distinct(remote_ratio, salary_in_usd, .keep_all = TRUE)
+# Contour plot oluEturma
+ggplot(df_clean, aes(x = remote_ratio, y = salary_in_usd)) +
+stat_contour(aes(z = salary_in_usd, color = after_stat(level)), bins = 15) +  # after_stat(level) ile gC<ncel sC6zdizimi
+scale_color_viridis_c() +  # Rengarenk renkler iC'in Viridis renk paleti
+labs(title = "Contour Plot: Salary in USD vs Remote Ratio",
+x = "Remote Ratio",
+y = "Salary in USD") +
+theme_minimal()
+library(networkD3)
+install.packages("networkD3")
+library(networkD3)
+#################################################################
+# Categorical variables for the arc plot
+arc_data <- df %>%
+select(work_year, experience_level, job_title, salary_currency, company_size)
+# Create a data frame for arc plot links
+links <- data.frame(
+source = rep(1:5, each = 4),  # Link sources (5 variables)
+target = c(2, 3, 4, 5, 3, 4, 5, 4, 5, 1, 2, 4),
+value = sample(1:20, 12, replace = TRUE)  # Random values to define flow
+)
+# Define labels for the nodes
+nodes <- data.frame(name = c("work_year", "experience_level", "job_title", "salary_currency", "company_size"))
+# Create the arc plot
+arc_plot <- sankeyNetwork(
+Links = links,
+Nodes = nodes,
+Source = "source",
+Target = "target",
+Value = "value",
+NodeID = "name",
+units = "TWh",
+fontSize = 12,
+nodeWidth = 30,
+linkColour = "rgba(255, 0, 0, 0.6)",
+nodePadding = 10
+)
+# Display the plot
+arc_plot
+#################################################################
+# Categorical variables for the arc plot
+arc_data <- df %>%
+select(work_year, experience_level, job_title, salary_currency, company_size)
+# Create a data frame for arc plot links
+links <- data.frame(
+source = rep(1:5, each = 4),  # Link sources (5 variables)
+target = c(2, 3, 4, 5, 3, 4, 5, 4, 5, 1, 2, 4),
+value = sample(1:20, 12, replace = TRUE)  # Random values to define flow
+)
+# Kategorik deDiEkenler iC'in bir liste oluEturuyoruz
+categories <- c("work_year", "experience_level", "job_title", "salary_currency", "company_size")
+# BaDlantD1larD1 oluEturmak iC'in kategoriler arasD1ndaki iliEkileri seC'iyoruz
+links <- data.frame(
+source = c(0, 0, 1, 1, 2, 2, 3, 3, 4, 4),  # Kaynak dC<DC<mleri
+target = c(1, 2, 3, 4, 4, 5, 0, 1, 2, 3),  # Hedef dC<DC<mleri
+value = sample(10:50, 10, replace = TRUE)  # BaDlantD1 deDerleri (C6rnek)
+)
+# DC<DC<m isimlerini tanD1mlD1yoruz
+nodes <- data.frame(name = categories)
+# Sankey diyagramD1nD1 oluEturuyoruz
+sankey <- sankeyNetwork(
+Links = links,
+Nodes = nodes,
+Source = "source",
+Target = "target",
+Value = "value",
+NodeID = "name",
+units = "Counts",
+fontSize = 12,
+nodeWidth = 30
+)
+# GC6rselleEtirmeyi gC6rC<ntC<le
+sankey
+# Kategorik deDiEkenler iC'in bir liste oluEturuyoruz
+categories <- c("work_year", "experience_level", "job_title", "salary_currency", "company_size")
+# BaDlantD1larD1 oluEturmak iC'in kategoriler arasD1ndaki iliEkileri seC'iyoruz
+links <- data.frame(
+source = c(0, 0, 1, 1, 2, 2, 3, 3, 4, 4),  # Kaynak dC<DC<mleri
+target = c(1, 2, 3, 4, 4, 5, 0, 1, 2, 3),  # Hedef dC<DC<mleri
+value = sample(10:50, 10, replace = TRUE)  # BaDlantD1 deDerleri (C6rnek)
+)
+# DC<DC<m isimlerini tanD1mlD1yoruz
+nodes <- data.frame(name = categories)
+# Sankey diyagramD1nD1 oluEturuyoruz
+sankey <- sankeyNetwork(
+Links = links,
+Nodes = nodes,
+Source = "source",
+Target = "target",
+Value = "value",
+NodeID = "name",
+units = "Counts",
+fontSize = 12,
+nodeWidth = 30
+)
+# GC6rselleEtirmeyi gC6rC<ntC<le
+sankey
+# YD1llara gC6re deneyim seviyelerinin sayD1sD1nD1 gruplama
+df_grouped <- df %>%
+group_by(work_year, experience_level) %>%
+summarise(count = n(), .groups = "drop")
+# Stream chart oluEturma
+plot_ly(df_grouped, x = ~work_year, y = ~count, color = ~experience_level, type = "scatter", mode = "lines", fill = "tozeroy", line = list(shape = "spline")) %>%
+layout(
+title = "Stream Chart: Experience Level by Year",
+xaxis = list(title = "Work Year"),
+yaxis = list(title = "Count"),
+colorway = c('red', 'green', 'blue', 'purple'), # Rengarenk palet
+showlegend = TRUE
+)
+#################################################################
+# YD1llara gC6re deneyim seviyelerinin sayD1sD1nD1 gruplama
+df_grouped <- df %>%
+group_by(work_year, experience_level) %>%
+summarise(count = n(), .groups = "drop")
+# Stream chart oluEturma
+plot_ly(df_grouped, x = ~work_year, y = ~count, color = ~experience_level, type = "scatter", mode = "lines", fill = "tozeroy", line = list(shape = "spline")) %>%
+layout(
+title = "Stream Chart: Experience Level by Year",
+xaxis = list(title = "Work Year"),
+yaxis = list(title = "Count"),
+colorway = c('#FF6347', '#4682B4', '#32CD32', '#FFD700'), # FarklD1 renkler
+showlegend = TRUE
+)
+df_grouped <- df %>%
+group_by(work_year, experience_level) %>%
+summarise(count = n(), .groups = "drop")
+# Stream chart oluEturma
+plot_ly(df_grouped, x = ~work_year, y = ~count, color = ~experience_level, type = "scatter", mode = "lines", fill = "tozeroy", line = list(shape = "spline")) %>%
+layout(
+title = "Stream Chart: Experience Level by Year",
+xaxis = list(title = "Work Year"),
+yaxis = list(title = "Count"),
+colorway = c('#FF6347', '#4682B4', '#32CD32', '#FFD700'), # FarklD1 renkler
+showlegend = TRUE
+)
+# YD1llara gC6re deneyim seviyelerinin sayD1sD1nD1 gruplama
+df_grouped <- df %>%
+group_by(work_year, experience_level) %>%
+summarise(count = n(), .groups = "drop")
+# Stream chart oluEturma
+plot_ly(df_grouped, x = ~work_year, y = ~count, color = ~experience_level, type = "scatter", mode = "lines", fill = "tozeroy", line = list(shape = "spline")) %>%
+layout(
+title = "Stream Chart: Experience Level by Year",
+xaxis = list(title = "Work Year"),
+yaxis = list(title = "Count"),
+colorway = c('#FF6347', '#4682B4', '#32CD32', '#FFD700'), # FarklD1 renkler
+showlegend = TRUE
+)
+# YD1llara gC6re deneyim seviyelerinin sayD1sD1nD1 gruplama
+df_grouped <- df %>%
+group_by(work_year, experience_level) %>%
+summarise(count = n(), .groups = "drop")
+# Stream chart oluEturma
+plot_ly(df_grouped, x = ~work_year, y = ~count, color = ~experience_level, type = "scatter", mode = "lines", fill = "tozeroy", line = list(shape = "spline")) %>%
+layout(
+title = "Stream Chart: Experience Level by Year",
+xaxis = list(title = "Work Year"),
+yaxis = list(title = "Count"),
+colorway = c('#FF6347', '#1340B4', '#32CD32', '#FFD700'), # FarklD1 renkler
+showlegend = TRUE
+)
+source("~/Desktop/Irem-Karagoz/final/Untitled.R")
+install.packages("plotly")
+install.packages("plotly")
+install.packages("plotly")
+install.packages("plotly")
