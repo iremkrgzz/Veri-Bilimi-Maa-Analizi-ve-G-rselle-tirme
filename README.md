@@ -1,0 +1,1 @@
+# Veri-Bilimi-Maa-Analizi-ve-G-rselle-tirme
